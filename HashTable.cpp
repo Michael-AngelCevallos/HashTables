@@ -139,6 +139,9 @@ HashTable::~HashTable() {
 unsigned int HashTable::hash(int key) {
     // FIXME (3): Implement logic to calculate a hash value
     // return key tableSize
+
+    // Use the modulo operator to map the key to a valid bucket index
+    return key % tableSize; // Calculate the hash value of a given key by using the modulo operator with the table size to ensure the hash value falls within the bounds of the hash table's buckets.
 }
 
 /**
