@@ -137,7 +137,7 @@ HashTable::~HashTable() {
  * @return The calculated hash
  */
 unsigned int HashTable::hash(int key) {
-    // FIXME (3): Implement logic to calculate a hash value
+    //! FIXME (3): Implement logic to calculate a hash value
     // return key tableSize
 
     // Use the modulo operator to map the key to a valid bucket index
@@ -150,7 +150,7 @@ unsigned int HashTable::hash(int key) {
  * @param bid The bid to insert
  */
 void HashTable::Insert(Bid bid) {
-    // FIXME (4): Implement logic to insert a bid
+    //! FIXME (4): Implement logic to insert a bid
     // create the key for the given bid
     unsigned int key = hash(stoi(bid.bidId));
 
@@ -191,7 +191,7 @@ void HashTable::Insert(Bid bid) {
  * Print all bids
  */
 void HashTable::PrintAll() {
-    // FIXME (5): Implement logic to print all bids
+    //! FIXME (5): Implement logic to print all bids
 
     // for node begin to end iterate - ITERATES THROUGH ALL BUCKETS IN THE HASH TABLE
     for (unsigned int i = 0; i < nodes.size(); i++){
@@ -234,7 +234,7 @@ void HashTable::PrintAll() {
  * @param bidId The bid id to search for
  */
 void HashTable::Remove(string bidId) {
-    // FIXME (6): Implement logic to remove a bid
+    // ! FIXME (6): Implement logic to remove a bid
 
 
     // set key equal to hash atoi bidID cstring
@@ -248,6 +248,15 @@ void HashTable::Remove(string bidId) {
       if (node->key == UINT_MAX) {
           return;
       }
+
+      // Mark the Bucket unused
+      node->key = UINT_MAX;
+
+      // Clear the bid Information
+      node->bid = Bid();
+
+      // Remove any collision chain 
+      node->next = nullptr;
 }
 
 /**
@@ -258,7 +267,7 @@ void HashTable::Remove(string bidId) {
 Bid HashTable::Search(string bidId) {
     Bid bid;
 
-    // FIXME (7): Implement logic to search for and return a bid
+    //! FIXME (7): Implement logic to search for and return a bid
 
     // create the key for the given bid - GENERATES HASH KEY FROM THE BID ID
     unsigned int key = hash(atoi(bidId.c_str()));
@@ -290,6 +299,20 @@ Bid HashTable::Search(string bidId) {
     //RETURN EMPTY BID IF NOT FOUND
     return bid;
 }
+
+/**
+ *  Return the C|#Current number of buckets in the hash table
+ * 
+ * @return size of the hash table
+ * 
+ */
+
+// Return the number of buckets in the hash table
+size_t HashTable::Size() {
+    return nodes.size(); 
+}
+
+
 
 //============================================================================
 // Static methods used for testing
