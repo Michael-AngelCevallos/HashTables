@@ -4,6 +4,12 @@
 // Version     : 1.0
 // Copyright   : Copyright � 2023 SNHU COCE
 // Description : Lab 4-2 Hash Table
+// 
+//! How To run Program, Pulls up Menu in Terminal <----------------------------------------------------------
+// 1. Compile the program using a C++20 compatible compiler. in Terminal Use:
+//  g++ HashTable.cpp CSVparser.cpp -o HashTable
+// 2. Run the compiled program in the terminal with the command:
+//  ./HashTable.exe
 //============================================================================
 
 #include <algorithm>
@@ -26,7 +32,7 @@ const unsigned int DEFAULT_SIZE = 179;
 double strToDouble(string str, char ch);
 
 // define a structure to hold bid information
-//! STRUCTURE BID - Creates the stucture for the Bids ( going to be imported)
+//! STRUCTURE BID - Creates the stucture for the Bids ( going to be imported)(Completed)
 struct Bid {
     string bidId; // unique identifier KEY
     string title;
@@ -96,7 +102,7 @@ public:
  * Default constructor
  */
 HashTable::HashTable() {
-    //!FIXME (1): Initialize the structures used to hold bids
+    //!FIXME (1): Initialize the structures used to hold bids(Completed)
     
     // Initalize node structure by resizing tableSize
     nodes.resize(DEFAULT_SIZE); // FIXME(1): Initialize the structures used to hold bids . USES nodes vector to resize the table size to default size
@@ -121,7 +127,7 @@ HashTable::HashTable(unsigned int size) {
  * Destructor - RUNS AUTOMATIClley When the object is destroyed
  */
 HashTable::~HashTable() {
-    //!FIX(2): Implement logic to free storage when class is destroyed
+    //!FIX(2): Implement logic to free storage when class is destroyed(Completed)
     
     // erase nodes beginning
     nodes.clear(); //clear all buckets from the hash table to fgree allocated storage when the class is destroyed
@@ -137,7 +143,7 @@ HashTable::~HashTable() {
  * @return The calculated hash
  */
 unsigned int HashTable::hash(int key) {
-    //! FIXME (3): Implement logic to calculate a hash value
+    //! FIXME (3): Implement logic to calculate a hash value(Completed)
     // return key tableSize
 
     // Use the modulo operator to map the key to a valid bucket index
@@ -150,7 +156,7 @@ unsigned int HashTable::hash(int key) {
  * @param bid The bid to insert
  */
 void HashTable::Insert(Bid bid) {
-    //! FIXME (4): Implement logic to insert a bid
+    //! FIXME (4): Implement logic to insert a bid(Completed)
     // create the key for the given bid
     unsigned int key = hash(stoi(bid.bidId));
 
@@ -191,7 +197,7 @@ void HashTable::Insert(Bid bid) {
  * Print all bids
  */
 void HashTable::PrintAll() {
-    //! FIXME (5): Implement logic to print all bids
+    //! FIXME (5): Implement logic to print all bids(Completed)
 
     // for node begin to end iterate - ITERATES THROUGH ALL BUCKETS IN THE HASH TABLE
     for (unsigned int i = 0; i < nodes.size(); i++){
@@ -234,7 +240,7 @@ void HashTable::PrintAll() {
  * @param bidId The bid id to search for
  */
 void HashTable::Remove(string bidId) {
-    // ! FIXME (6): Implement logic to remove a bid
+    // ! FIXME (6): Implement logic to remove a bid(Completed)
 
 
     // set key equal to hash atoi bidID cstring
@@ -267,7 +273,7 @@ void HashTable::Remove(string bidId) {
 Bid HashTable::Search(string bidId) {
     Bid bid;
 
-    //! FIXME (7): Implement logic to search for and return a bid
+    //! FIXME (7): Implement logic to search for and return a bid(Completed)
 
     // create the key for the given bid - GENERATES HASH KEY FROM THE BID ID
     unsigned int key = hash(atoi(bidId.c_str()));
@@ -307,7 +313,7 @@ Bid HashTable::Search(string bidId) {
  * 
  */
 
-// Return the number of buckets in the hash table
+//! Return the number of buckets in the hash table(Completed)
 size_t HashTable::Size() {
     return nodes.size(); 
 }
