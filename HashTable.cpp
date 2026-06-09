@@ -152,11 +152,39 @@ unsigned int HashTable::hash(int key) {
 void HashTable::Insert(Bid bid) {
     // FIXME (4): Implement logic to insert a bid
     // create the key for the given bid
+    unsigned int key = hash(stoi(bid.bidId));
+
     // retrieve node using key
+    Node* node = &nodes[key];
+
     // if no entry found for the key
-        // assign this node to the key position
+    if (node->key == UINT_MAX) {
+
+     // Store Key in the bucket
+       node->key = key;
+
+    //Store bid in the Buicket
+       node->bid = bid;
+
+   // No colllision Chain Exists yet
+       node->next = nullptr;
+    } else {
+        //Travese the chain to find the end of Collision Chain
+        while (node->next != nullptr) {
+            node = node->next;
+        }
+        // Create a new node for the colliding bid
+        Node* newNode = new Node(bid, key); 
+
+        // Link the new nopde to the end of the chain
+        node->next = newNode;
+        
+    }
     // else if node is not used
+    
          // assing old node key to UNIT_MAX, set to key, set old node to bid and old node next to null pointer
+    
+          // if the node is already used, assign the old node key to UINT_MAX, set the old node key to the new key, set the old node bid to the new bid, and set the old node next to null pointer
     // else find the next open node
             // add new newNode to end
 }
