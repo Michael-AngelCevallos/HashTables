@@ -168,39 +168,63 @@ void HashTable::Insert(Bid bid) {
 
    // No colllision Chain Exists yet
        node->next = nullptr;
-    } else {
-        //Travese the chain to find the end of Collision Chain
+    }
+    else{ 
+        //Travese the chain to find the end of the collision chain
         while (node->next != nullptr) {
             node = node->next;
         }
         // Create a new node for the colliding bid
         Node* newNode = new Node(bid, key); 
 
-        // Link the new nopde to the end of the chain
+        // Link the new node to the end of the chain
         node->next = newNode;
         
     }
-    // else if node is not used
-    
-         // assing old node key to UNIT_MAX, set to key, set old node to bid and old node next to null pointer
-    
-          // if the node is already used, assign the old node key to UINT_MAX, set the old node key to the new key, set the old node bid to the new bid, and set the old node next to null pointer
-    // else find the next open node
-            // add new newNode to end
 }
+
+
+
+
 
 /**
  * Print all bids
  */
 void HashTable::PrintAll() {
     // FIXME (5): Implement logic to print all bids
-    // for node begin to end iterate
-    //   if key not equal to UINT_MAx
-            // output key, bidID, title, amount and fund
-            // node is equal to next iter
-            // while node not equal to nullptr
-               // output key, bidID, title, amount and fund
-               // node is equal to next node
+
+    // for node begin to end iterate - ITERATES THROUGH ALL BUCKETS IN THE HASH TABLE
+    for (unsigned int i = 0; i < nodes.size(); i++){
+        
+        //   if key not equal to UINT_MAX - SKIPS THE UNUSED BUCKETS
+        if (nodes[i].key != UINT_MAX) {
+
+            // output key, bidID, title, amount and fund - PRINTS BUCKETS NODES
+            cout << "Key " << nodes[i].key << ": "
+                << nodes[i].bid.bidId << " | "
+                << nodes[i].bid.title << " | "
+                << nodes[i].bid.amount << " | "
+                << nodes[i].bid.fund << endl;
+
+            // Node is equal to next iter - MOVES TO THE FIRST NODE IN THE CHAIN NODE
+            Node* node = nodes[i].next; // Move to the first chained node
+
+            // while node not equal to nullptr - TRAVERSE COLLISION CHAIN
+            while (node != nullptr) {
+
+                // output key, bidID, title, amount and fund - PRINTS THE CHAIN NODES
+                cout << "Key " << node->key << ": "
+                << node->bid.bidId << " | "
+                << node->bid.title << " | "
+                << node->bid.amount << " | "
+                << node->bid.fund << endl;
+
+                // node is equal to next node - ADVANCE TO THER NEXT CHAIN NODE
+                node = node->next; // Move to the next node in the chain
+            }
+
+        }
+    }
 
 }
 
@@ -211,8 +235,19 @@ void HashTable::PrintAll() {
  */
 void HashTable::Remove(string bidId) {
     // FIXME (6): Implement logic to remove a bid
+
+
     // set key equal to hash atoi bidID cstring
-    // erase node begin and key
+      // Create the hash key from the bid Id
+      unsigned int key = hash(atoi(bidId.c_str()));
+
+      // Retrieve the Bucket Associated with the key 
+      Node* node = &nodes[key];
+
+      // if the bucket is empty, nothing can be removed
+      if (node->key == UINT_MAX) {
+          return;
+      }
 }
 
 /**
